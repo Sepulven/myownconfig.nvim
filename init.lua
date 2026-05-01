@@ -72,15 +72,20 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
-require 'config.options'
-
 -- Diagnostic Config & Keymaps
 -- See :help vim.diagnostic.Opts
 vim.diagnostic.config {
-  update_in_insert = false,
-  severity_sort = true,
-  float = { border = 'rounded', source = 'if_many' },
-  underline = { severity = { min = vim.diagnostic.severity.WARN } },
+  update_in_insert = false, -- No auto update in insert mode
+  severity_sort = true, -- Sort by importance. ERROR > WARN > INFO > HINT
+  float = {
+    border = 'rounded', -- Round box for diagnostic
+    source = 'if_many', -- If reported by multiple sources, label it
+  },
+  underline = {
+    severity = {
+      min = vim.diagnostic.severity.WARN, -- Underline the diagnostic
+    },
+  },
 
   -- Can switch between these as you prefer
   virtual_text = true, -- Text shows up at the end of the line
@@ -89,6 +94,8 @@ vim.diagnostic.config {
   -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
   jump = { float = true },
 }
+
+require 'config.options'
 require 'config.keymaps'
 require 'config.autocmds'
 
